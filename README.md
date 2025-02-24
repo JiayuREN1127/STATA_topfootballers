@@ -6,5 +6,5 @@ It is designed to instantly crawl real-time data of top football players and dis
 
 #### Access
 Thanks for your attention！  
-To get the access, contact me on gitee platform.
+To get the access, contact me on github platform.
 
