@@ -1,6 +1,5 @@
 # STATA_topfootballers
 
-#
 #### 简简简介
 topfootballers是一个自主编写的stata命令。  
 它旨在即时爬取实时的顶尖足球球员数据，并根据用户设定的参数进行条件筛选展示。  
