@@ -83,7 +83,7 @@ version 18
 			infix strL v 1-20000 using "Big5-data.txt", clear
 		}
 		if "`league'" == "CSL" {
-			copy "https://fbref.com/en/comps/62/2024/2024-Chinese-Super-League-Stats" "CSL-data.txt", replace
+			copy "https://fbref.com/en/comps/62/Chinese-Super-League-Stats" "CSL-data.txt", replace
 			infix strL v 1-20000 using "CSL-data.txt", clear	
 		}
 		if "`league'" == "UCL" {
@@ -200,7 +200,7 @@ version 18
 			erase Big5-data.txt
 		}
 		if "`league'" == "CSL" {
-			copy "https://fbref.com/en/comps/62/2024/stats/2024-Chinese-Super-League-Stats" "CSL-data.txt", replace
+			copy "https://fbref.com/en/comps/62/stats/Chinese-Super-League-Stats" "CSL-data.txt", replace
 			infix strL v 1-20000 using "CSL-data.txt", clear	
 			erase CSL-data.txt
 		}
@@ -255,21 +255,23 @@ version 18
 		cap drop newname
 		
 		cap drop age
-		if "`league'" == "CSL"{
-			gen age = ustrregexs(1) if ustrregexm(v, `"data-stat="age" >([^<]+)</td><td"')
-		}
-		else{
-			gen age = ustrregexs(1) if ustrregexm(v, `"data-stat="age" >([^<]+)-"')
-		}
+// 		if "`league'" == "CSL"{
+// 			gen age = ustrregexs(1) if ustrregexm(v, `"data-stat="age" >([^<]+)</td><td"')
+// 		}
+// 		else{
+// 			gen age = ustrregexs(1) if ustrregexm(v, `"data-stat="age" >([^<]+)-"')
+// 		}
+		gen age = ustrregexs(1) if ustrregexm(v, `"data-stat="age" >([^<]+)-"')
 		destring age, replace
 		
 		cap drop position
-		if "`league'" == "UCL"{
-			gen position = ustrregexs(1) if ustrregexm(v, `"" >([^<]+)</td><td class="left " data-stat="team" ><"')
-		}
-		else{
-			gen position = ustrregexs(1) if ustrregexm(v, `"" >([^<]+)</td><td class="left " data-stat="team" ><a href="')
-		}
+// 		if "`league'" == "UCL"{
+// 			gen position = ustrregexs(1) if ustrregexm(v, `"" >([^<]+)</td><td class="left " data-stat="team" ><"')
+// 		}
+// 		else{
+// 			gen position = ustrregexs(1) if ustrregexm(v, `"" >([^<]+)</td><td class="left " data-stat="team" ><a href="')
+// 		}
+		gen position = ustrregexs(1) if ustrregexm(v, `"" >([^<]+)</td><td class="left " data-stat="team" ><a href="')
 		
 		cap drop nationality
 		gen nationality = ustrregexs(1) if ustrregexm(v, `"</span> ([^<]+)</span></a></td><td class="center " data-stat="position" "')
@@ -299,7 +301,7 @@ version 18
 
 		
 		**加入Author私货
-		drop if name == "Jude Bellingham"
+		replace name = "I don't like him" if name == "Jude Bellingham"
 		
 			
 	}
@@ -343,10 +345,10 @@ version 18
 	list indicator rank value name club position age nationality, t ab(15)
 	
 		
-	**加入Author私货
-	if "`indicator'" == "Gls" & ( `rank' == 9 | `rank' == 10 ) & "`league'" == "UCL"{
-		di "Notice: You can find out that among the top 10 UCL scorers, there is only 1 midfielder except for forwards(before the knock-out games), and the author regards this German wonderkid as the best U21 C.A.M. at present."
-	}
+// 	**加入Author私货
+// 	if "`indicator'" == "Gls" & ( `rank' == 9 | `rank' == 10 ) & "`league'" == "UCL"{
+// 		di "Notice: You can find out that among the top 10 UCL scorers, there is only 1 midfielder except for forwards(before the knock-out games), and the author regards this German wonderkid as the best U21 C.A.M. at present."
+// 	}
 	
 	
 	erase players.dta
